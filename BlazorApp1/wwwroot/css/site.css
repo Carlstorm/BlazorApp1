@@ -109,3 +109,21 @@ a, .btn-link {
     animation-duration: 0.66s; /* don't forget to set a duration! */
     animation-fill-mode: forwards;
 }
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to the parent element */
+.fadeIn {
+    animation: fadeIn ease-out; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 0.33s; /* don't forget to set a duration! */
+    animation-fill-mode: forwards;
+}

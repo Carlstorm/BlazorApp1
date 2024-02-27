@@ -1,4 +1,5 @@
-﻿using BlazorApp1.Models;
+﻿using BlazorApp1.Components;
+using BlazorApp1.Models;
 using System;
 using System.Net.Http.Headers;
 using System.Reflection.PortableExecutable;
@@ -103,9 +104,11 @@ namespace BlazorApp1.Services
                     {
                         Id = movie.Id,
                         ImageUrl = movie.PosterPath,
+                        backdropUrl = movie.BackdropPath,
                         Title = movie.Title ?? movie.NameTitle,
                         Date = movie.Date ?? movie.FirstAirDate,
                         Rating = movie.Rating,
+                        Overview = movie.Overview,
                     };
                 }).ToList() ?? new List<MovieModel>();
 
@@ -199,6 +202,7 @@ namespace BlazorApp1.Services
                 return Result;
             }
         }
+
     }
 }
 

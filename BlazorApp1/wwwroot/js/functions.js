@@ -22,12 +22,16 @@ let animationIndex = 0;
 
 
 window.animateImageLoaded = (imageElement, loadIndex) => {
-    console.log(loadIndex)
     setTimeout(() => {
         imageElement.parentElement.classList.add('posetAnimate');
     }, 30 * loadIndex); // Adjust the delay as needed
 /*    DoAnimate(movieImageArray);*/
 }
+
+window.backdropLoad = (imageElement) => {
+    imageElement.classList.add('fadeIn');
+}
+
 const DoAnimate = (array) => {
     array.forEach((elm, i) => {
         console.log(i)

@@ -9,6 +9,12 @@
 @inject IMovieReviewService MovieReviewService
 @inject IJSRuntime JSRuntime
 
+@*<PopUp Open="@PopUpOpen" ClosePopUp="ClosePopUp">
+    <div>
+        
+    </div>
+</PopUp>*@
+<MovieDetails Open="@PopUpOpen" ClosePopUp="ClosePopUp" Movie="SelectedMovie" />
 <div @ref="wrapRef">
     <PopcornSideBar GalleryMode="@MovieReviewService.GalleryMode" SortChanged="HandleSortChanged" GenreChanged="HandleGenreChanged" Genres="@genres" TVgenres="@TVgenres" ActiveGenre="@MovieReviewService.Genre" ActiveTvGenre="@MovieReviewService.TvGenre" />
     <div class="Header">
@@ -56,7 +62,7 @@
                     // Calculate delay for new movies
                     double NewMovieIndex = isNewMovie ? (movie.Index - moviesLoadedCount) : 0;
 
-                    <div class="Gallery_item">
+                    <div class="Gallery_item" @onclick="() => OpenPopUp(movie.Value)">
                         @if (movie.Value.ImageUrl is null)
                         {
                             <div class="Gallery_item_image" style="background-image: url(assets/posterPlaceHolder.png);">
@@ -111,6 +117,10 @@
     // Gets a reference to the MainLayout component
     private DotNetObjectReference<BlazorApp1.Pages.Popcorn>? dotNetHelper;
 
+    public bool PopUpOpen = false;
+
+    public MovieModel? SelectedMovie = null;
+
     List<MovieModel>? movies = null;
     List<GenreModel>? genres = null;
     List<GenreModel>? TVgenres = null;
@@ -125,11 +135,22 @@
 
     //string FormatAnimationDelay(double delay) => $"{delay:0.##}".Replace(",", ".");
 
-    private async Task animateImageLoaded(ElementReference imageElement)
+    private void OpenPopUp(MovieModel? movie)
     {
-        //await Task.Delay(1000);
-        //await JSRuntime.InvokeVoidAsync("animateImageLoaded", imageElement);
+        SelectedMovie = movie;
+        PopUpOpen = true;
     }
+
+    async Task ClosePopUp()
+    {
+        PopUpOpen = false;
+    }
+
+    //private async Task animateImageLoaded(ElementReference imageElement)
+    //{
+    //    //await Task.Delay(1000);
+    //    //await JSRuntime.InvokeVoidAsync("animateImageLoaded", imageElement);
+    //}
 
     async Task HandleSearchQueryChanged(string query)
     {

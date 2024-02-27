@@ -8,8 +8,10 @@ namespace BlazorApp1.Models
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+        public string? backdropUrl { get; set; }
         public double? Rating { get; set; }
         public string? Date { get; set; }
+        public string? Overview { get; set; }
         public string? FirstAirDate { get; set; }
         public string? NameTitle { get; set; }
     }
@@ -21,6 +23,11 @@ namespace BlazorApp1.Models
 
         [JsonPropertyName("poster_path")]
         public string PosterPath { get; set; }
+
+        [JsonPropertyName("backdrop_path")]
+        public string BackdropPath { get; set; }
+        [JsonPropertyName("overview")]
+        public string Overview { get; set; }
 
         [JsonPropertyName("title")]
         public string Title { get; set;}
@@ -56,5 +63,8 @@ namespace BlazorApp1.Models
         [JsonPropertyName("name")]
         public string? Name { get; set; }
     }
+    public class MovieDetails
+    {
 
+    }
 }
