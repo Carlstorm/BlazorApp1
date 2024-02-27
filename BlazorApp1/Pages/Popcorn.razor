@@ -1,0 +1,312 @@
+﻿@page "/popcorn"
+@using BlazorApp1.Models
+@using BlazorApp1.Services
+@using BlazorApp1.SvgComponents
+@using BlazorApp1.Components
+@using System.Timers;
+
+@implements IDisposable
+@inject IMovieReviewService MovieReviewService
+@inject IJSRuntime JSRuntime
+
+<div @ref="wrapRef">
+    <PopcornSideBar GalleryMode="@MovieReviewService.GalleryMode" SortChanged="HandleSortChanged" GenreChanged="HandleGenreChanged" Genres="@genres" TVgenres="@TVgenres" ActiveGenre="@MovieReviewService.Genre" ActiveTvGenre="@MovieReviewService.TvGenre" />
+    <div class="Header">
+        <div class="Header_icons_left">
+            <div class="Header_icon_wrap @(MovieReviewService.GalleryMode != 1 ? "Header_icon_wrap--selected" : "")" @onclick="@(() => ToggleGalleryMode(0))">
+                <MovieIcon />
+                <span>Movies</span>
+                <div class="Header_icon_wrap_glow" style="opacity: @(MovieReviewService.GalleryMode == 0 ? 1 : 0)"></div>
+            </div>
+            <div class="Header_icon_wrap @(MovieReviewService.GalleryMode == 1 ? "Header_icon_wrap--selected" : "")" @onclick="@(() => ToggleGalleryMode(1))">
+                <TvIcon />
+                <span>Tv shows</span>
+                <div class="Header_icon_wrap_glow" style="opacity: @(MovieReviewService.GalleryMode == 1 ? 1 : 0)"></div>
+            </div>
+        </div>
+        <img class="Header_logo" src="assets/popcornLogo.png" />
+        <div class="Header_icons_right">
+            <Search ResetFilter="ResetFilter" SearchQueryChanged="HandleSearchQueryChanged" SearchQuery="@MovieReviewService.SearchString" />
+            <HeartIcon FillColor="white" StrokeColor="white" ClassName="Popcorn_Nav_Icon" />
+            <LocklOpenIcon ClassName="Popcorn_Nav_Icon" />
+            <CogWheelIcon ClassName="Popcorn_Nav_Icon" />
+            <InfoIcon ClassName="Popcorn_Nav_Icon" />
+        </div>
+    </div>
+    <div class="Gallery" @ref="galleryRef">
+        <Loading DisplayState="@((movies is null || genres is null || TVgenres is null))" />
+        @if (movies != null && genres != null && TVgenres != null)
+        {
+            if (movies.Count == 0)
+            {
+                <div class="Gallery_none_found">
+                    <p>No @(
+                  MovieReviewService.GalleryMode == 0 ? "movies" : "tv series"
+                  ) found</p>
+                    <button @onclick="ResetFilter" class="btn btn-primary btn-sm">Reset filters</button>
+                </div>
+            }
+            else
+            {
+                @foreach (var movie in movies.Select((value, index) => new { Value = value, Index = index }))
+                {
+                    // check if the movie is new
+                    bool isNewMovie = movie.Index >= moviesLoadedCount;
+
+                    // Calculate delay for new movies
+                    double NewMovieIndex = isNewMovie ? (movie.Index - moviesLoadedCount) : 0;
+
+                    <div class="Gallery_item">
+                        @if (movie.Value.ImageUrl is null)
+                        {
+                            <div class="Gallery_item_image" style="background-image: url(assets/posterPlaceHolder.png);">
+                                <img src="assets/posterPlaceHolder.png" style="display: none;" onload="animateImageLoaded(this, @NewMovieIndex)">
+                                <span>@movie.Value.Title</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="Gallery_item_image" style="background-image: url(https://image.tmdb.org/t/p/w185/@movie.Value.ImageUrl);">
+                                <img src="https://image.tmdb.org/t/p/w185/@movie.Value.ImageUrl" style="display: none;" onload="animateImageLoaded(this, @NewMovieIndex)">
+                            </div>
+                        }
+                        <div class="Gallery_item_hover">
+                            <div class="Gallery_item_hover_content">
+                                <h5 class="Gallery_item_title">@movie.Value.Title</h5>
+
+                                <span class="Gallery_item_year">
+                                    <HeartIcon />
+                                    @(
+                                        movie.Value.Date.Split("-")[0]
+                            )
+                                </span>
+                            </div>
+                            <div class="Gallery_item_hover_rating">
+                                <Rating RatingValue="@movie.Value.Rating" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            }
+        }
+    </div>
+</div>
+
+<div style="height: 600px"></div>
+
+
+@code {
+    [CascadingParameter]
+    public MainLayout Layout { get; set; }
+    // Gets a reference to the MainLayout component
+    private DotNetObjectReference<BlazorApp1.Pages.Popcorn>? dotNetHelper;
+
+    List<MovieModel>? movies = null;
+    List<GenreModel>? genres = null;
+    List<GenreModel>? TVgenres = null;
+    ElementReference wrapRef;
+
+    int moviesLoadedCount = 0;
+    int animationProgress = 0;
+
+    private bool PageIsFilled;
+
+    ElementReference galleryRef;
+
+    //string FormatAnimationDelay(double delay) => $"{delay:0.##}".Replace(",", ".");
+
+    private async Task animateImageLoaded(ElementReference imageElement)
+    {
+        //await Task.Delay(1000);
+        //await JSRuntime.InvokeVoidAsync("animateImageLoaded", imageElement);
+    }
+
+    async Task HandleSearchQueryChanged(string query)
+    {
+        MovieReviewService.SearchString = query;
+        MovieReviewService.AllMoviesLoaded = false;
+        movies = null;
+        await CheckGallerySize(true);
+        // You can perform additional logic here if needed
+    }
+
+    public async Task ToggleGalleryMode(int ModeIndex)
+    {
+        if (MovieReviewService.GalleryMode == ModeIndex)
+        {
+            return;
+        }
+        MovieReviewService.GalleryMode = ModeIndex;
+        //MovieReviewService.Sort = "popularity.desc";
+        MovieReviewService.AllMoviesLoaded = false;
+        MovieReviewService.LastPageLoaded = 0;
+        MovieReviewService.MovieList = new List<MovieModel>();
+        moviesLoadedCount = 0;
+        movies = null;
+        await CheckGallerySize(true);
+    }
+
+    public async Task ResetFilter()
+    {
+        MovieReviewService.SearchString = "";
+        MovieReviewService.AllMoviesLoaded = false;
+        movies = null;
+        await CheckGallerySize(true);
+    }
+
+    private Timer timer;
+
+    protected override void OnInitialized()
+    {
+        timer = new Timer(300); // Set the interval to 600 milliseconds
+        timer.AutoReset = false; // Ensures the timer only triggers once
+        timer.Elapsed += Timer_Elapsed;
+        Layout.Fullpage = true;
+        Layout.Background = "black";
+        Layout.Update();
+    }
+
+    private async Task HandleSortChanged(string Sort)
+    {
+        MovieReviewService.Sort = Sort;
+
+        MovieReviewService.AllMoviesLoaded = false;
+        movies = null;
+        await CheckGallerySize(true);
+    }
+
+    private async Task HandleGenreChanged(int? Genre)
+    {
+        if (MovieReviewService.GalleryMode == 0)
+        {
+            MovieReviewService.Genre = Genre;
+        } else
+        {
+            MovieReviewService.TvGenre = Genre;
+        }
+
+        MovieReviewService.AllMoviesLoaded = false;
+        movies = null;
+        await CheckGallerySize(true);
+    }
+
+    public void Dispose()
+    {
+        timer.Dispose(); // Clean up the timer
+        Layout.Fullpage = false;
+        Layout.Background = null;
+        Layout.Update();
+        JSRuntime.InvokeAsync<Task>("removeScrollEvent");
+        JSRuntime.InvokeAsync<Task>("removeResizeEvent");
+        movies = null;
+        MovieReviewService.MovieList = new List<MovieModel>();
+        dotNetHelper?.Dispose();
+    }
+
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    movies = await MovieReviewService.GetMoviesYes();
+    //}
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetHelper = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("Helpers.setDotNetHelper", dotNetHelper);
+            genres = await MovieReviewService.InitGenres();
+            TVgenres = await MovieReviewService.InitTvGenres();
+            await JSRuntime.InvokeAsync<Task>("addScrollEvent");
+            await JSRuntime.InvokeAsync<Task>("addResizeEvent");
+            await CheckGallerySize();
+        }
+    }
+
+    [JSInvokable]
+    public async Task OnWindowScrolled()
+    {
+        await CheckGallerySize();
+    }
+
+    private bool isLoading = false;
+
+
+    public async Task LoadMore(bool? needReset = null)
+    {
+        if (!isLoading && !MovieReviewService.AllMoviesLoaded)
+        {
+            if (movies != null)
+                moviesLoadedCount = movies.Count;
+            isLoading = true;
+            movies = await MovieReviewService.GetMoviesYes(needReset);
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    int lastGalmode = 0;
+    private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        // Reset the timer and call LoadMore using InvokeAsync to switch to UI thread
+        await InvokeAsync(async () =>
+        {
+            if (lastGalmode != MovieReviewService.GalleryMode)
+                return;
+            lastGalmode = MovieReviewService.GalleryMode;
+            timer.Stop();
+            await LoadMore();
+        });
+    }
+
+    private async Task CheckGallerySize(bool? needReset = null)
+    {
+        if (!wrapRef.Equals(default(ElementReference)))
+        {
+            if (movies is null)
+            {
+                PageIsFilled = false;
+            }
+            var galleryHeightString = needReset == true ? 0 : await JSRuntime.InvokeAsync<int>("getHeight", wrapRef);
+
+            var screenHeight = await JSRuntime.InvokeAsync<int>("getWindowHeight");
+            var screenYOffset = await JSRuntime.InvokeAsync<int>("getWindowYOffset");
+
+            if (galleryHeightString < screenHeight + screenYOffset)
+            {
+                await LoadMore(needReset);
+                if (!PageIsFilled && !MovieReviewService.AllMoviesLoaded)
+                {
+                    
+                    await CheckGallerySize();
+                    //timer.Start();
+                    //await CheckGallerySize();
+                }
+
+                //if (!timer.Enabled) // Check if the timer is not already running
+                //{
+                //    timer.Start(); // Start the timer
+                //}
+            }
+            else
+            {
+                PageIsFilled = true;
+            }
+        }
+    }
+
+
+}
+
