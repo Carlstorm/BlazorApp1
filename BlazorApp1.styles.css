@@ -1,0 +1,759 @@
+/* _content/BlazorApp1/Components/MovieDetails.razor.rz.scp.css */
+.component[b-tl0vlu63g5] {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.component_backdrop[b-tl0vlu63g5] {
+    opacity: 0;
+    position: absolute;
+    z-index: 0;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%, -64px);
+    left: 50%;
+}
+
+.component_content[b-tl0vlu63g5] {
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 12%, rgba(0,0,0,0.55) 100%);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.component_header[b-tl0vlu63g5] {
+    max-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 32px;
+}
+
+.component_content>h1[b-tl0vlu63g5], .component_content>span[b-tl0vlu63g5] {
+    padding: 16px 24px;
+}
+
+.component_content_card[b-tl0vlu63g5] {
+    background: rgb(0 0 0 / 33%);
+    flex: 1;
+}
+/* _content/BlazorApp1/Components/PopcornSideBar.razor.rz.scp.css */
+.component[b-af0vtsnv0n] {
+    height: calc(100% - 64px);
+    top: 64px;
+    position: fixed;
+    z-index: 1;
+    display: flex;
+}
+
+.component_tab_wrap[b-af0vtsnv0n] {
+    height: 100%;
+    width: 24px;
+    position: relative;
+}
+
+.component_side_bar[b-af0vtsnv0n] {
+    padding-top: 6px;
+    background: rgb(0 0 0 / 85%);
+    border-right: 1px solid rgb(255 255 255 / 16%);
+    box-shadow: 0 0 16px 0 black;
+    height: 100%;
+    width: 0px;
+    transition: width 0.2s ease;
+    backdrop-filter: blur(24px);
+    overflow: hidden;
+}
+
+.Genre[b-af0vtsnv0n] {
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: white;
+    font-size: 11px;
+    opacity: 0.35;
+    letter-spacing: 2px;
+    padding: 4px 0 4px 16px;
+    white-space: nowrap;
+}
+
+.Genre:hover[b-af0vtsnv0n] {
+    opacity: 1;
+}
+
+.Genre--selected[b-af0vtsnv0n] {
+    opacity: 1 !important;
+    background: rgb(0,155,255);
+    background: linear-gradient(90deg, #99cbff9c 0%, #66b0ff80 10%, #238dff5e 60%, rgba(0,142,255,0) 100%);
+}
+
+.component_side_bar--open[b-af0vtsnv0n] {
+    width: 180px;
+}
+
+.component_tab[b-af0vtsnv0n] {
+    opacity: 0.8;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    height: 64px;
+    width: 16px;
+    background: rgb(0 0 0 / 85%);
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    padding-right: 2px;
+    outline: 1px rgb(255 255 255 / 10%) solid;
+    cursor: pointer;
+    box-shadow: 1px 1px 8px 0 black;
+    transition: opacity 0.2s ease;
+}
+
+.component_tab--open[b-af0vtsnv0n] {
+    opacity: 0;
+}
+
+.component_tab:hover[b-af0vtsnv0n] {
+/*    opacity: 1;
+    box-shadow: 0px 0px 12px 0 rgb(42 117 255 / 40%), 1px 1px 8px 0 black;*/
+}
+
+.component_tab > div[b-af0vtsnv0n] {
+    box-shadow: 0 0 9px 1px #2a75ffe0;
+    background: rgb(255 255 255 / 60%);
+    height: 80%;
+    width: 1px;
+}
+
+.component_side_bar_sort[b-af0vtsnv0n] {
+    margin-top: 8px;
+    padding: 8px 16px;
+    display: flex;
+    border-top: 1px solid rgb(255 255 255 / 10%);
+    font-size: 12px !important;
+    gap: 8px;
+}
+
+.component_side_bar_sort:hover select[b-af0vtsnv0n] {
+    opacity: 0.75 !important;
+}
+
+.component_side_bar_sort>span[b-af0vtsnv0n] {
+    opacity: 0.35;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.component_side_bar_sort>select[b-af0vtsnv0n] {
+    opacity: 0.35;
+    background: transparent;
+    border: none;
+    color: white;
+    flex: 1;
+    transform: translateY(1px);
+    width: 84px;
+    cursor: pointer;
+}
+
+.component_side_bar_sort>select:focus[b-af0vtsnv0n] {
+    border: none;
+    outline: none;
+}
+
+.component_side_bar_sort>select *[b-af0vtsnv0n] {
+    background: rgb(6 6 5) !important;
+}
+/* _content/BlazorApp1/Components/PopUp.razor.rz.scp.css */
+.overlay[b-qbwu35woo9] {
+    position: fixed;
+    z-index: 10;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background: rgb(0 0 0 / 75%);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.content_container[b-qbwu35woo9] {
+    height: 700px;
+    width: 1200px;
+    background: black;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 8px 8px 64px 0 black;
+    position: relative;
+    cursor: default;
+}
+
+.close_button[b-qbwu35woo9] {
+    position: absolute;
+    right: 18px;
+    top: 12px;
+    color: white;
+    z-index: 8;
+    opacity: 0.66;
+    cursor: pointer;
+}
+
+.close_button:hover[b-qbwu35woo9] {
+    opacity: 1
+}
+
+/* _content/BlazorApp1/Components/Rating.razor.rz.scp.css */
+.component[b-nfqun7uxxy] {
+    position: relative;
+    width: max-content;
+}
+
+.base_stars[b-nfqun7uxxy] {
+    position: relative;
+    width: max-content;
+    display: flex;
+}
+
+.fill_stars[b-nfqun7uxxy] {
+    position: absolute;
+    top: 0;
+    display: flex;
+}
+/* _content/BlazorApp1/Components/Search.razor.rz.scp.css */
+.component[b-vz3jr78quu] {
+    overflow: hidden;
+    transform: translate(8px, 5px);
+    transition: width 0.2s ease-in-out; 
+}
+
+.search_wrap[b-vz3jr78quu] {
+    opacity: 0.6;
+    display: flex;
+    border-radius: 24px;
+    border: 1px solid;
+    border-color: #ffffff00;
+    transition: border-color 0.2s ease-in-out, opacity 0.14s ease-in-out;
+    padding: 3px 6px 4px 12px;
+    justify-content: space-between;
+    float: right;
+    gap: 4px;
+}
+
+.search_wrap--open[b-vz3jr78quu] {
+    border-color: #ffffff61;
+    opacity: 1;
+}
+
+.search_wrap--open>svg[b-vz3jr78quu] {
+    opacity: 0.6;
+}
+
+.search_wrap--closed[b-vz3jr78quu] {
+    border-color: transparent;
+}
+
+.search_wrap:hover[b-vz3jr78quu] {
+    opacity: 1;
+}
+
+
+input[b-vz3jr78quu] {
+    background: transparent;
+    background-color: transparent;
+    color: white;
+    font-size: 12px;
+    padding: 0;
+    outline: none;
+    border: none;
+    width: 150px;
+}
+/* _content/BlazorApp1/Pages/Popcorn.razor.rz.scp.css */
+.no-gutters[b-m8wcvwsot2] {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+}
+
+.Header[b-m8wcvwsot2] {
+    height: 64px;
+    width: 100%;
+    background: red;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.875) 0%, rgba(0,0,0,1) 100%);
+    box-shadow: 0 0px 12px 6px #000000f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Header_icons_left[b-m8wcvwsot2], .Header_icons_right[b-m8wcvwsot2] {
+    flex: 1;
+    padding: 0 16px;
+}
+
+.Header_icons_right[b-m8wcvwsot2] {
+    display: flex;
+    flex: 1;
+    padding: 0 16px;
+    fill: white;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 12px;
+    transform: translateY(-4px)
+}
+
+.Header_icons_left[b-m8wcvwsot2] {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    gap: 24px;
+    overflow: hidden;
+}
+
+.Header_icon_wrap[b-m8wcvwsot2] {
+    transform: translateY(3px);
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    gap: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.14s ease-in-out;
+}
+
+.Header_icon_wrap--selected[b-m8wcvwsot2] {
+    opacity: 0.8;
+}
+
+.Header_icon_wrap:hover .Header_icon_wrap_glow[b-m8wcvwsot2],
+.Header_icon_wrap:hover[b-m8wcvwsot2] {
+    opacity: 1;
+}
+
+.Header_icon_wrap_glow[b-m8wcvwsot2] {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+    background: red;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    transform: translate(-50%, -54%);
+    left: 50%;
+    top: 50%;
+    background: rgb(0,155,255, 0);
+    background: radial-gradient(circle, #99cbffb3 10%, #66b0ff80 20%, #238dff5e 30%, transparent 55%);
+}
+/*text-shadow: 0 0 5px #228DFF, 0 0 10px #228DFF, 0 0 15px #228DFF, 0 0 20px #fff, 0 0 35px #fff, 0 0 40px #228DFF, 0 0 50px #228DFF, 0 0 75px #228DFF;*/
+.Header_icon_wrap > span[b-m8wcvwsot2] {
+    z-index: 1;
+    color: white;
+    font-size: 9px;
+    letter-spacing: 2px;
+}
+
+.Header_logo[b-m8wcvwsot2] {
+    height: 70%;
+}
+
+.Gallery[b-m8wcvwsot2] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.Gallery_none_found[b-m8wcvwsot2] {
+    text-align: center;
+    color: #ffffff75;
+    margin-top: 64px;
+    font-style: italic;
+}
+
+.Gallery_none_found>button[b-m8wcvwsot2] {
+    color: #ffffff;
+    background: rgba(0,170,255,0.2);
+    border-radius: 50px;
+    padding: 4px 18px;
+    transition: background 0.14s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 0 12px 0px rgba(0,170,255,0.5);
+}
+
+.Gallery_none_found>button:hover[b-m8wcvwsot2] {
+    background: rgba(0,170,255,0.66);
+    box-shadow: 0 0 12px 0px rgba(0,170,255,0.25);
+}
+
+.Gallery_item[b-m8wcvwsot2] {
+    aspect-ratio: 1/1.48;
+    overflow: hidden;
+    margin: 1px;
+    position: relative;
+
+/*    animation: fadeIn 1s ease-in-out;*/
+}
+
+@keyframes fadeIn-b-m8wcvwsot2 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.Gallery_item_image[b-m8wcvwsot2] {
+    height: 100%;
+    white-space: 100%;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    /*    transform: scale(0);*/
+}
+
+.Gallery_item_image > span[b-m8wcvwsot2] {
+    color: white;
+    font-weight: bold;
+    background: #080808a3;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 90%;
+}
+
+.Gallery_item_hover[b-m8wcvwsot2] {
+    opacity: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: opacity 0.2s ease-in;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20%;
+}
+
+.Gallery_item_hover:hover[b-m8wcvwsot2] {
+    opacity: 0.8;
+}
+
+.Gallery_item_hover_content[b-m8wcvwsot2] {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}
+
+.Gallery_item_hover_rating[b-m8wcvwsot2] {
+    height: 16%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Gallery_item_title[b-m8wcvwsot2] {
+    color: black;
+    text-align: center;
+    opacity: 0.8;
+    width: 100%;
+    padding: 0 10%;
+    overflow-wrap: anywhere;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.Gallery_item_year[b-m8wcvwsot2] {
+    color: black;
+    text-align: center;
+    opacity: 0.8;
+    width: 100%;
+    padding: 0 10%;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+}
+/* _content/BlazorApp1/Pages/Test.razor.rz.scp.css */
+.test[b-a7q1pdo9ts] {
+  background-color: black;
+}
+
+.test_2[b-a7q1pdo9ts] {
+  background-color: yellow;
+}
+
+.test_3[b-a7q1pdo9ts] {
+  background-color: black;
+}
+/* _content/BlazorApp1/Shared/MainLayout.razor.rz.scp.css */
+.page[b-45rkf8v3vv] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-45rkf8v3vv] {
+    flex: 1;
+}
+
+.sidebar[b-45rkf8v3vv] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    z-index: 4;
+}
+
+
+.overlay_Reflection[b-45rkf8v3vv] {
+    background: rgb(255,255,255,0.0);
+    background: linear-gradient(105deg, rgba(255,255,255,0), rgba(255,255,255,0) 20%, rgba(255,255,255,0.05) 34.8%, rgba(255,255,255,0) 35%, rgba(255,255,255,0) 100%);
+    z-index: 2;
+    position: fixed;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%);
+    left: calc(128px + 50%);
+    top: 50%;
+    pointer-events: none;
+    /*    clip-path: polygon(0 0, 48% 0, 27% 100%, 0% 100%);*/
+}
+
+.fullpage[b-45rkf8v3vv] {
+    position: relative;
+}
+
+.top-row[b-45rkf8v3vv] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-45rkf8v3vv]  a, .top-row .btn-link[b-45rkf8v3vv] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-45rkf8v3vv] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-45rkf8v3vv] {
+        display: none;
+    }
+
+    .top-row.auth[b-45rkf8v3vv] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-45rkf8v3vv], .top-row .btn-link[b-45rkf8v3vv] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-45rkf8v3vv] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-45rkf8v3vv] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-45rkf8v3vv] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row content[b-45rkf8v3vv] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* _content/BlazorApp1/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-b5wscdn8ts] {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-b5wscdn8ts] {
+  height: 3.5rem;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand[b-b5wscdn8ts] {
+  font-size: 1.1rem;
+}
+
+.oi[b-b5wscdn8ts] {
+  width: 2rem;
+  font-size: 1.1rem;
+  vertical-align: text-top;
+  top: -2px;
+}
+
+.nav-item[b-b5wscdn8ts] {
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+}
+
+.nav-item:first-of-type[b-b5wscdn8ts] {
+  padding-top: 1rem;
+}
+
+.nav-item:last-of-type[b-b5wscdn8ts] {
+  padding-bottom: 1rem;
+}
+
+.nav-item[b-b5wscdn8ts]  a {
+  color: #d7d7d7;
+  border-radius: 4px;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  line-height: 3rem;
+}
+
+.nav-item[b-b5wscdn8ts]  a.active {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: white;
+}
+
+.nav-item[b-b5wscdn8ts]  a:hover {
+  background-color: red;
+  color: white;
+}
+
+@media (min-width: 641px) {
+  .navbar-toggler[b-b5wscdn8ts] {
+    display: none;
+  }
+  .collapse[b-b5wscdn8ts] {
+    /* Never collapse the sidebar for wide screens */
+    display: block;
+  }
+}
+/* _content/BlazorApp1/SvgComponents/CogWheelIcon.razor.rz.scp.css */
+.Popcorn_Nav_Icon[b-9bd7me2gsp] {
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 0.14s ease-in-out;
+    height: 17px;
+    width: 17px;
+}
+
+.Popcorn_Nav_Icon:hover[b-9bd7me2gsp] {
+    opacity: 1;
+}
+/* _content/BlazorApp1/SvgComponents/HeartIcon.razor.rz.scp.css */
+.component[b-pfc0uszyt6] {
+    transform: translate(-4px, -1px)
+}
+
+.component:hover[b-pfc0uszyt6] {
+    fill: black;
+    transform: translate(-4px, -1px) scale(1.1);
+}
+
+
+.Popcorn_Nav_Icon[b-pfc0uszyt6] {
+    opacity: 0.6;
+    stroke: white;
+    height: 19px;
+    width: 19px;
+    transform: translateY(1px);
+    cursor: pointer;
+    transition: opacity 0.14s ease-in-out;
+}
+
+.Popcorn_Nav_Icon:hover[b-pfc0uszyt6] {
+    opacity: 1;
+}
+/* _content/BlazorApp1/SvgComponents/InfoIcon.razor.rz.scp.css */
+.Popcorn_Nav_Icon[b-uck9o3ftrn] {
+    height: 20px;
+    width: 20px;
+    transform: translateY(1px);
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 0.14s ease-in-out;
+}
+
+.Popcorn_Nav_Icon:hover[b-uck9o3ftrn] {
+     opacity: 1;
+}
+/* _content/BlazorApp1/SvgComponents/LocklOpenIcon.razor.rz.scp.css */
+.Popcorn_Nav_Icon[b-02ykiuuhyl] {
+    opacity: 0.6;
+    cursor: pointer;
+    transition: opacity 0.14s ease-in-out;
+    height: 16px;
+    width: 16px;
+    transform: translateY(-1px);
+    margin-right: 2px;
+}
+
+.Popcorn_Nav_Icon:hover[b-02ykiuuhyl] {
+    opacity: 1;
+}
+/* _content/BlazorApp1/SvgComponents/MovieIcon.razor.rz.scp.css */
+.component[b-egd3yf64t7] {
+    height: 20px;
+    z-index: 1;
+    width: 20px;
+}
+/* _content/BlazorApp1/SvgComponents/SearchIcon.razor.rz.scp.css */
+.Search_Field_Icon[b-vdwvder35p] {
+    cursor: pointer;
+    min-width: 17px;
+    height: 17px;
+    width: 17px;
+    stroke: white;
+    transform: translateY(1px)
+}
+
+.open[b-vdwvder35p] {
+    stroke: #ff9191 !important;
+    opacity: 0.6;
+}
+
+.open:hover[b-vdwvder35p] {
+  opacity: 1;
+}
+/* _content/BlazorApp1/SvgComponents/TvIcon.razor.rz.scp.css */
+.component[b-xqwvddhwnh] {
+    height: 20px;
+    z-index: 1;
+    width: 20px;
+}
